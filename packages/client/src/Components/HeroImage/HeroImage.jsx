@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import { Stack } from '@mui/system'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import image from "../images/background.jpg";
+import image from "../../images/background.jpg";
 
 export default class HeroImage extends Component {
   static propTypes = {

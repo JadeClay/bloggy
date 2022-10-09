@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "cd ./packages/client && react-scripts start"
+    "client": "cd ./packages/client && react-scripts start",
+    "api": "cd ./packages/server && node index.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
     "lerna": "^5.5.4"
   },
   "dependencies": {
-    "@mui/icons-material": "^5.10.6"
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/icons-material": "^5.10.6",
+    "react-markdown": "^8.0.3"
   }
 }
