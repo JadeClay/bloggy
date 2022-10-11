@@ -14,8 +14,10 @@ mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${proc
         if(res){
             console.log("Database connected succesfully")
         }
-
+        
+        /* Adding routes to the API */
         app.use(router);
+
         app.listen(process.env.port, () => {
             console.log(`App listening on port ${process.env.port}`);
         });
