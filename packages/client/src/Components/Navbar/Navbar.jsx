@@ -13,13 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Stack } from '@mui/system';
+import { UserContext } from '../../Context/UserContext';
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Dashboard', 'Logout'];
 
 const Navbar = ({ date }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [userContext, setUserContext] = React.useContext(UserContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,6 +37,29 @@ const Navbar = ({ date }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleUserSettingsChange = () => {
+    if(userContext.token === null){
+        console.log(userContext);
+        return(
+            <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">{"Log in"}</Typography>
+            </MenuItem>
+        )
+
+    }else{
+        console.log(userContext);
+        return( 
+             settings.map((setting) => (
+                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                     <Typography textAlign="center">{setting}</Typography>
+                 </MenuItem>
+             ))
+        )
+    }
+
+
+  }
 
   return (
     <AppBar position="sticky">
@@ -149,11 +174,7 @@ const Navbar = ({ date }) => {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                         >
-                        {settings.map((setting) => (
-                            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center">{setting}</Typography>
-                            </MenuItem>
-                        ))}
+                        {handleUserSettingsChange(userContext)}
                         </Menu>
                     </Box>
                 </Toolbar>

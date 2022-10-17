@@ -5,6 +5,7 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+import { UserProvider } from "./Context/UserContext";
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -28,7 +29,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>,
 );
 
