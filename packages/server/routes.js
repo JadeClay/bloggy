@@ -3,6 +3,9 @@ const passport = require("./auth/auth");
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
+/* Bloggy Libraries */
+const InfoMessages = require('./Utils/Error');
+
 /*Importing all mongodb models */
 const Post = require('./Models/Post');
 const User = require('./Models/User');
@@ -12,11 +15,13 @@ const User = require('./Models/User');
 router.post("/register", function (req, res) {
     User.register(new User({ email: req.body.email, username: req.body.username }), req.body.password, function (err, user) {
         if (err) {
+            InfoMessages.Warning(err);
             res.json({ success: false, message: "Your account could not be saved. Error: " + err });
         }
         else {
             req.login(user, (er) => {
                 if (er) {
+                    InfoMessages.Warning(er);
                     res.json({ success: false, message: er });
                 }
                 else {
@@ -27,7 +32,6 @@ router.post("/register", function (req, res) {
     });
 });
 
-/* TODO: Send a cookie with the JWT, and entire JWT logic*/
 router.post('/login', (req, res) => {
     if (!req.body.username) {
         res.json({ success: false, message: "Username was not given" })
@@ -38,7 +42,7 @@ router.post('/login', (req, res) => {
     else {
         passport.authenticate("local", function (err, user, info) {
             if (err) {
-                console.log(err);
+                InfoMessages.Error(err);
                 res.status(500).json({ success: false, message: err });
             }
             else {
@@ -47,26 +51,28 @@ router.post('/login', (req, res) => {
                 }
                 else {
                     const token = jwt.sign({ userId: user._id, username: user.username }, process.env.SECRET, { expiresIn: "24h" });
+                    InfoMessages.Info(token);
                     console.log(jwt.verify(token, process.env.SECRET)); 
-                    res.status(200).json({ success: true, message: "Authentication successful", token: token });
+                    res.status(200).cookie('token', token).json({ success: true, message: "Authentication successful", token: token });
                 }
             }
         })(req, res);
     }
 });
 
+router.get('/logout', (req, res) => {
+    res.status(200).clearCookie('token').send({ success: true, message: "Logged out succesfully" });
+});
+
 router.get("/me", (req, res, next) => {
-    res.send(req.user)
+    if(req.cookies.token) res.send(jwt.verify(req.body.token, process.env.SECRET));
+    else res.status(404).send({ success: false, message: "Username not found"});
 })
 /* Posts routes */
 
 router.get('/posts/last', async (req, res) => {
     const all = await Post.find({}).limit(1).sort({ _id: -1}).lean();
     res.status(200).send(all);
-})
-
-router.get('/hello', (req, res) => {
-    res.status(200).send({body: "Hello World"});
 })
 
 module.exports = router

@@ -1,3 +1,4 @@
+/* 3rd party libraries */
 const dotenv = require('dotenv').config({ path: '../../.env' });
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -8,7 +9,12 @@ const session = require('express-session')({
   resave: false,
   saveUninitialized: false
 });
+const cookieParser = require('cookie-parser');
 
+/* Bloggy libraries */
+const InfoMessages = require('./Utils/Error');
+
+/* Express.js related modules */
 const router = require('./routes');
 const User = require('./Models/User');
 const app = express();
@@ -37,6 +43,7 @@ app.use(session);
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors(corsOptions));
+app.use(cookieParser());
 
 /* Using method to serialize and deserialize sessions */
 passport.serializeUser(User.serializeUser());
@@ -51,12 +58,13 @@ app.use(router);
 mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`)
     .then(res => {
         if(res){
-            console.log("Database connected succesfully")
+            InfoMessages.Info('Database connected succesfully');
+            app.listen(process.env.port, () => {
+              InfoMessages.Info(`App listening on port ${process.env.port}`);
+          });
         }
 
-        app.listen(process.env.port, () => {
-            console.log(`App listening on port ${process.env.port}`);
-        });
+
     });
 
 

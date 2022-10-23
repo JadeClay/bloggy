@@ -2,7 +2,7 @@ import React, { useState } from "react"
 
 const UserContext = React.createContext([{}, () => {}])
 
-let initialState = { token: null }
+let initialState = { username: null, token: null }
 
 const UserProvider = props => {
   const [state, setState] = useState(initialState)

@@ -13,15 +13,23 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import Root from './routes/Root';
+import Home from './routes/Home';
+import Dashboard from './routes/Dashboard';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-  },
-  {
-    path: "/posts",
-    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />
+      }
+    ]
   }
 ]);
 
