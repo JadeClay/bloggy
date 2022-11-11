@@ -5,6 +5,8 @@ import BloggyIcon from '../Icons/BloggyIcon'
 import LinkBehavior from '../LinkBehavior'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { login } from '../../app/reducers/userSlice'
 
 const style = {
     position: 'absolute',
@@ -18,7 +20,8 @@ const style = {
     p: 4,
   };
 
-function LoginModal() {
+function LoginModal({setUser}) {
+    const dispatch = useDispatch()
     const [open, setOpen] = React.useState(false);
     const [alert, setAlert] = React.useState(false); // For enabling and disabling alert
     const [username, setUsername] = React.useState('');
@@ -67,6 +70,7 @@ function LoginModal() {
                 console.log('Connection Succesfully');
                 if(error) setError(false);
                 setOpen(false);
+                dispatch(login({ user: response.username, token: response.token}))
                 startAlert();
                 Navigate('/dashboard');
             } else {
@@ -111,10 +115,10 @@ function LoginModal() {
         </Modal>
       </Box>
     );
-  }
+}
   
 
-export default function Footer() {
+export default function Footer(setUser) {
   return (
     <Grid container sx={{
         paddingTop: '2vh',
@@ -127,7 +131,7 @@ export default function Footer() {
             <Stack sx={{paddingLeft: 2}}>
                 <BloggyIcon sx={{fontSize: '30vh', height: 60}}/>
 
-                <LoginModal />
+                <LoginModal setUser={setUser}/>
             </Stack>
         </Grid>
         <Divider />

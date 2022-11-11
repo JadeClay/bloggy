@@ -28,7 +28,7 @@ const Navbar = ({ date }) => {
 
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
         <Stack>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>

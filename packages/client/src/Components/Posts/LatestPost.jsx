@@ -21,7 +21,7 @@ export default function LatestPost() {
                 setBody(data[0].body);
                 setLink("/posts/" + data[0]._id);
             })
-            .catch(error => setTitle(error));
+            .catch(error => {console.log(error); setTitle('[Error] Failed to fetch post')});
     })
   
     return (

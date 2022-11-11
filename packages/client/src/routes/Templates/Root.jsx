@@ -1,8 +1,9 @@
 import React from 'react';
 import { createTheme, CssBaseline, responsiveFontSizes, ThemeProvider } from '@mui/material';
-import Navbar from "../Components/Navbar/Navbar";
+import Navbar from "../../Components/Navbar/Navbar";
 import { Outlet } from 'react-router-dom';
-import Footer from '../Components/Footer/Footer';
+import Footer from '../../Components/Footer/Footer';
+import { useSelector } from 'react-redux';
 
 let DarkTheme = createTheme({
   palette: {
@@ -27,9 +28,9 @@ function Root() {
 
       <Navbar/>
 
-      <Outlet />
+      <Outlet/>
 
-      <Footer />
+      <Footer/>
 
     </ThemeProvider>
 

@@ -53,7 +53,7 @@ router.post('/login', (req, res) => {
                     const token = jwt.sign({ userId: user._id, username: user.username }, process.env.SECRET, { expiresIn: "24h" });
                     InfoMessages.Info(token);
                     console.log(jwt.verify(token, process.env.SECRET)); 
-                    res.status(200).cookie('token', token).json({ success: true, message: "Authentication successful", token: token });
+                    res.status(200).cookie('token', token).json({ success: true, message: "Authentication successful", username: user.username, token: token });
                 }
             }
         })(req, res);
