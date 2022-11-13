@@ -1,4 +1,5 @@
-import { Grid } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import React from 'react'
 import { Navigate } from 'react-router-dom';
 import AdminSidebar from '../Components/AdminSidebar';
@@ -15,13 +16,13 @@ export default function Dashboard() {
         </Grid>
         
 
-        <Grid item xs={11}>
-          <Grid container spacing={2}>
+        <Grid item xs={11} sx={{marginLeft: {xs: '15vw', md: 0}}}>
+          <Grid container spacing={0}>
             <Grid item xs={12}>
-              <p>Hola, Oscar Alberto!</p>
+              <Typography variant="h3" textAlign={"left"} sx={{paddingTop: 3}}><EmojiPeopleIcon sx={{fontSize: 'inherit'}}/> Hello, {user.user}!</Typography>
             </Grid>
             <Grid item xs={12}>
-              <Editor />
+              <Editor author={user.user}/>
             </Grid>
           </Grid>
         </Grid>

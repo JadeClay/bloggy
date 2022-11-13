@@ -11,7 +11,6 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Stack } from '@mui/system';
-import { UserContext } from '../../Context/UserContext';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 

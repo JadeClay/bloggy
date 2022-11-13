@@ -70,6 +70,18 @@ router.get("/me", (req, res, next) => {
 })
 /* Posts routes */
 
+router.post("/posts/create", function (req, res) {
+    const NewPost = new Post({
+        title: req.body.title,
+        author: req.body.author,
+        body: req.body.body,
+        hidden: false
+    })
+
+    NewPost.save().then((result) => res.status(200).send({ success: true, message: "Post has been created succesfully", result: result }))
+                  .catch((error) => { console.error(error); res.status(500).send({success: false, message: "There has been an error", result: error})})
+});
+
 router.get('/posts/last', async (req, res) => {
     const all = await Post.find({}).limit(1).sort({ _id: -1}).lean();
     res.status(200).send(all);
