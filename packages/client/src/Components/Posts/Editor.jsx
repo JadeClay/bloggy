@@ -40,7 +40,7 @@ export default function Editor(author) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         'title': title,
-        'author': author.toString(),
+        'author': author.author,
         'body': body
       }),
     }).then(response => response.json())
@@ -84,7 +84,7 @@ export default function Editor(author) {
                 onChange={handleTitle}
               />
             </Box>
-
+            {console.log(author.author)}
             <div data-color-mode="dark" style={{ width: '90%'  }}>
                 <MDEditor
                     value={body}
