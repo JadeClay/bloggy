@@ -29,10 +29,10 @@ export default function LatestPost() {
         <Container sx={{paddingTop: "0.5vh"}}>
             <Typography variant="h3" component="h2" textAlign="center"> {Title} </Typography>
             <Divider />
-            <Typography variant="body1" textAlign="justify">
+            <Typography variant="body1" textAlign="justify" sx={{maxHeight: '800px', overflow: 'hidden'}}>
                 <ReactMarkdown children={Body}/>
             </Typography>
-            <Button variant="contained" sx={{marginBottom: "1vh"}} href={Link}>Read more</Button>
+            <Button variant="contained" sx={{mt: "1vh", marginBottom: "1vh"}} href={Link}>Read more</Button>
         </Container>
         
     </Paper>

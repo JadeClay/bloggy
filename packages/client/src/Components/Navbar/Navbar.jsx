@@ -11,11 +11,24 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Stack } from '@mui/system';
+import { Link } from '@mui/material';
+import LinkBehavior from '../LinkBehavior';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Home', 'Posts'];
 
 const Navbar = ({ date }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  const handleLinks = (index) => {
+    switch (index) {
+      case 0:
+        return "/";
+      case 1:
+        return "/posts";
+      default:
+        return "/";
+    }
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -32,23 +45,24 @@ const Navbar = ({ date }) => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="/"
-                        sx={{
-                        mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '.3rem',
-                        color: 'inherit',
-                        textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography>
+                    <Link component={LinkBehavior} link={"/"} underline={"none"} color={'inherit'}>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="a"
+                            sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                            }}
+                        >
+                            Bloggy
+                        </Typography>
+                    </Link>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -79,41 +93,47 @@ const Navbar = ({ date }) => {
                             display: { xs: 'block', md: 'none' },
                         }}
                         >
-                        {pages.map((page) => (
-                            <MenuItem key={page} onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">{page}</Typography>
-                            </MenuItem>
+                        {pages.map((page, index) => (
+                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                    <Link component={LinkBehavior} link={handleLinks(index)} underline={"none"} color={'inherit'}>
+                                        <Typography textAlign="center">{page}</Typography>
+                                    </Link>
+                                </MenuItem>
                         ))}
                         </Menu>
                     </Box>
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                        mr: 2,
-                        display: { xs: 'flex', md: 'none' },
-                        flexGrow: 1,
-                        fontFamily: 'monospace',
-                        fontWeight: 700,
-                        letterSpacing: '.3rem',
-                        color: 'inherit',
-                        textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography>
+                    <Link component={LinkBehavior} link={"/"} underline={"none"} color={'inherit'}>
+                        <Typography
+                            variant="h5"
+                            noWrap
+                            component="a"
+                            sx={{
+                            mr: 2,
+                            display: { xs: 'flex', md: 'none' },
+                            flexGrow: 1,
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                            }}
+                        >
+                            Bloggy
+                        </Typography>
+                    </Link>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                        <Button
+                        {pages.map((page, index) => (
+                        <Link component={LinkBehavior} link={handleLinks(index)} underline={"none"} color={'inherit'}>
+                            <Button
                             key={page}
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}
-                        >
-                            {page}
-                        </Button>
+                            >
+                                {page}
+                            </Button>
+                        </Link>
+
                         ))}
                     </Box>
 

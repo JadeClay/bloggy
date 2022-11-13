@@ -106,7 +106,7 @@ function LoginModal({setUser}) {
                         {error && <TextField error id="filled-basic" label="Username" variant="filled" name='username' onChange={handleUsername} helperText={errorMessage} /> }
                         {error && <TextField error id="filled-basic" label="Password" variant="filled" name='password' type='password' onChange={handlePassword}/>}
                         {!error && <TextField id="filled-basic" label="Username" variant="filled" name='username' onChange={handleUsername}/>}
-                        {!error && <TextField id="filled-basic" label="Password" variant="filled" name='password' onChange={handlePassword}/>}
+                        {!error && <TextField id="filled-basic" label="Password" variant="filled" name='password' type='password' onChange={handlePassword}/>}
                         <Button type='submit'>Submit</Button>
                     </Stack>
                 </form>

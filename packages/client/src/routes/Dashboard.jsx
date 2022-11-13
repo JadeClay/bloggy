@@ -12,7 +12,7 @@ export default function Dashboard() {
     return (
       <Grid container spacing={2}>
         <Grid item xs={1}>
-          <AdminSidebar />
+          <AdminSidebar selectedElement={0}/>
         </Grid>
         
 
