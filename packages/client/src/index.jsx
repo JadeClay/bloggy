@@ -16,6 +16,9 @@ import Root from './routes/Templates/Root';
 import Home from './routes/Home';
 import Admin from './routes/Templates/Admin';
 import Dashboard from './routes/Dashboard';
+import DashboardPosts from './routes/DashboardPosts';
+import DashboardSettings from './routes/DashboardSettings';
+import DashboardAccounts from './routes/DashboardAccounts';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />
+      },
+      {
+        path: "/dashboard/posts",
+        element: <DashboardPosts />
+      },
+      {
+        path: "/dashboard/accounts",
+        element: <DashboardAccounts />
+      },
+      {
+        path: "/dashboard/settings",
+        element: <DashboardSettings />
       }
     ]
   }

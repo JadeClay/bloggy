@@ -70,6 +70,40 @@ router.get("/me", (req, res, next) => {
 })
 /* Posts routes */
 
+router.get("/posts/all", async function (req, res) {
+    
+    try {
+        const Posts = await Post.find().lean().exec();
+
+        res.json({Posts});
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+    }
+
+})
+
+/* router.get("/posts/all", async function (req, res) {
+    const { page = 1, limit = 10} = req.query;
+
+    try {
+        const Posts = await Post.find().limit(limit * 1).skip((page - 1) * limit).exec();
+
+        // get total documents in the Post collection
+
+        const count = await Post.countDocuments();
+
+        // return response with posts, total pages, and current page
+        res.json({
+            Posts,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page
+        });
+    } catch (err) {
+      console.error(err.message);
+    }
+}); */
+
 router.post("/posts/create", function (req, res) {
     const NewPost = new Post({
         title: req.body.title,
