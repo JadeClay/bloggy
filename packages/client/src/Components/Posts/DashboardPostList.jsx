@@ -25,7 +25,7 @@ export default function DashboardPostList() {
     const columns = [
       {
         field: 'date',
-        headerName: 'date',
+        headerName: 'Date',
         type: 'dateTime',
         width: 150,
         valueGetter: ({ value }) => value && new Date(value).toDateString()
