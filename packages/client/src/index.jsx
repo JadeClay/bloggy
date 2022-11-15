@@ -15,10 +15,10 @@ import '@fontsource/roboto/700.css';
 import Root from './routes/Templates/Root';
 import Home from './routes/Home';
 import Admin from './routes/Templates/Admin';
-import Dashboard from './routes/Dashboard';
-import DashboardPosts from './routes/DashboardPosts';
-import DashboardSettings from './routes/DashboardSettings';
-import DashboardAccounts from './routes/DashboardAccounts';
+import Dashboard from './routes/Dashboard/Dashboard';
+import DashboardPosts from './routes/Dashboard/DashboardPosts';
+import DashboardSettings from './routes/Dashboard/DashboardSettings';
+import DashboardAccounts from './routes/Dashboard/DashboardAccounts';
 
 const router = createBrowserRouter([
   {

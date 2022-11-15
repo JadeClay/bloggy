@@ -2,9 +2,8 @@ import { Grid, Typography } from '@mui/material'
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import React from 'react'
 import { Navigate } from 'react-router-dom';
-import AdminSidebar from '../Components/AdminSidebar';
+import AdminSidebar from '../../Components/AdminSidebar';
 import { useSelector } from 'react-redux';
-import Editor from '../Components/Posts/Editor';
 
 export default function DashboardAccounts() {
   const user = useSelector((state) => state.user.value);

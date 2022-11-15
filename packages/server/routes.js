@@ -12,7 +12,7 @@ const User = require('./Models/User');
 
 /* Authentification routes */
 
-router.post("/register", function (req, res) {
+router.post("/register", (req, res) => {
     User.register(new User({ email: req.body.email, username: req.body.username }), req.body.password, function (err, user) {
         if (err) {
             InfoMessages.Warning(err);
@@ -70,7 +70,7 @@ router.get("/me", (req, res, next) => {
 })
 /* Posts routes */
 
-router.get("/posts/all", async function (req, res) {
+router.get("/posts/all", async (req, res) => {
     
     try {
         const Posts = await Post.find().lean().exec();
@@ -78,7 +78,23 @@ router.get("/posts/all", async function (req, res) {
         res.json({Posts});
     } catch (error) {
         console.error(error);
-        res.status(500);
+        res.status(404);
+    }
+
+})
+
+router.delete("/posts/delete", async function (req, res){
+    
+    const postId = req.body.id;
+
+    try{
+        const PostToDelete = await Post.findByIdAndDelete(postId).exec();
+
+        console.error(PostToDelete);
+        res.status(200).send({success: true, message: PostToDelete});
+    } catch (error) {
+        console.error(error);
+        res.status(404).send({message: error})
     }
 
 })
