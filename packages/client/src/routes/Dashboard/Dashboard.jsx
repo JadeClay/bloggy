@@ -22,7 +22,7 @@ export default function Dashboard() {
               <Typography variant="h3" textAlign={"left"} sx={{paddingTop: 3}}><EmojiPeopleIcon sx={{fontSize: 'inherit'}}/> Hello, {user.user}!</Typography>
             </Grid>
             <Grid item xs={12}>
-              <Editor author={user.user}/>
+              <Editor author={user.user} />
             </Grid>
           </Grid>
         </Grid>

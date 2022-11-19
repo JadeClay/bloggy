@@ -84,7 +84,6 @@ export default function Editor(author) {
                 onChange={handleTitle}
               />
             </Box>
-            {console.log(author.author)}
             <div data-color-mode="dark" style={{ width: '90%'  }}>
                 <MDEditor
                     value={body}

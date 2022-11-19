@@ -68,6 +68,7 @@ router.get("/me", (req, res, next) => {
     if(req.cookies.token) res.send(jwt.verify(req.body.token, process.env.SECRET));
     else res.status(404).send({ success: false, message: "Username not found"});
 })
+
 /* Posts routes */
 
 router.get("/posts/all", async (req, res) => {
@@ -83,6 +84,40 @@ router.get("/posts/all", async (req, res) => {
 
 })
 
+router.patch("/posts/edit/:id", async (req, res) => {
+    const PostId = req.params.id;
+    
+    try {
+        const PostLooked = await Post.findById(PostId).exec();
+        PostLooked.title = req.body.title;
+        PostLooked.body = req.body.body;
+        
+        await PostLooked.save();
+
+        console.log(PostLooked);
+
+        res.json({success: true});
+    } catch (error) {
+        console.error(error);
+        res.status(404).end();
+    }
+
+})
+
+router.get("/posts/find/:id", async (req, res) => {
+    const PostId = req.params.id;
+    
+    try {
+        const PostLooked = await Post.findById(PostId).exec();
+
+        res.json({success: true, PostLooked});
+    } catch (error) {
+        console.error(error);
+        res.status(404);
+    }
+
+})
+
 router.delete("/posts/delete", async function (req, res){
     
     const postId = req.body.id;
@@ -90,7 +125,6 @@ router.delete("/posts/delete", async function (req, res){
     try{
         const PostToDelete = await Post.findByIdAndDelete(postId).exec();
 
-        console.error(PostToDelete);
         res.status(200).send({success: true, message: PostToDelete});
     } catch (error) {
         console.error(error);
@@ -99,7 +133,7 @@ router.delete("/posts/delete", async function (req, res){
 
 })
 
-/* router.get("/posts/all", async function (req, res) {
+router.get("/posts/all", async function (req, res) {
     const { page = 1, limit = 10} = req.query;
 
     try {
@@ -118,7 +152,7 @@ router.delete("/posts/delete", async function (req, res){
     } catch (err) {
       console.error(err.message);
     }
-}); */
+});
 
 router.post("/posts/create", function (req, res) {
     const NewPost = new Post({
@@ -133,7 +167,7 @@ router.post("/posts/create", function (req, res) {
 });
 
 router.get('/posts/last', async (req, res) => {
-    const all = await Post.find({}).limit(1).sort({ _id: -1}).lean();
+    const all = await Post.find().limit(1).sort({ _id: -1}).lean();
     res.status(200).send(all);
 })
 

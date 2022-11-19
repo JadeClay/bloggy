@@ -3,6 +3,7 @@ import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { useEffect } from 'react';
 import { DeleteOutline, EditOutlined } from '@mui/icons-material';
 import { Alert, Snackbar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function handleEditClick (id) {
 
@@ -17,6 +18,7 @@ function handleEditClick (id) {
 */
 
 export default function DashboardPostList() {
+    const Navigate = useNavigate();
     const [alert, setAlert] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
     const [rows, setRows] = React.useState([]);
@@ -46,14 +48,13 @@ export default function DashboardPostList() {
               icon={<EditOutlined />}
               label="Edit"
               className="textPrimary"
-              onClick={handleEditClick(id)}
+              onClick={(e) => Navigate(`/dashboard/posts/edit/${id}`)}
               color="inherit"
             />,
             <GridActionsCellItem
               icon={<DeleteOutline />}
               label="Delete"
               onClick={(e) => {
-                console.log(e.target.id);
                 fetch(`http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/posts/delete`, {
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' },
@@ -128,7 +129,6 @@ export default function DashboardPostList() {
         editMode={"row"}
       />
 
-      {console.log(rows)}
     </div>
   );
 }

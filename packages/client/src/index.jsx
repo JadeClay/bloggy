@@ -19,6 +19,7 @@ import Dashboard from './routes/Dashboard/Dashboard';
 import DashboardPosts from './routes/Dashboard/DashboardPosts';
 import DashboardSettings from './routes/Dashboard/DashboardSettings';
 import DashboardAccounts from './routes/Dashboard/DashboardAccounts';
+import DashboardPostsEdit from './routes/Dashboard/DashboardPostsEdit';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/posts",
         element: <DashboardPosts />
+      },
+      {
+        path: "/dashboard/posts/edit/:id",
+        element: <DashboardPostsEdit />
       },
       {
         path: "/dashboard/accounts",
