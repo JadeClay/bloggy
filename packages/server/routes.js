@@ -9,7 +9,6 @@ const InfoMessages = require('./Utils/Error');
 /*Importing all mongodb models */
 const Post = require('./Models/Post');
 const User = require('./Models/User');
-const Author = require('./Models/Author');
 
 /* Authentification routes */
 
@@ -198,5 +197,39 @@ router.get('/posts/last', async (req, res) => {
     const all = await Post.find().limit(1).sort({ _id: -1}).lean();
     res.status(200).send(all);
 })
+
+/* Background Upload Route */
+
+router.post('/upload/background', async function (req, res) {
+    try {
+        if(!req.files) {
+            res.send({
+                status: false,
+                message: 'No file uploaded'
+            });
+        } else {
+            //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
+            let background = req.files.background;
+            
+            //Use the mv() method to place the file in the upload directory (i.e. "uploads")
+            background.mv('./public/images/' + "background.jpg");
+
+            //send response
+            res.send({
+                status: true,
+                message: 'File is uploaded',
+                data: {
+                    name: background.name,
+                    mimetype: background.mimetype,
+                    size: background.size
+                }
+            });
+        }
+    } catch (err) {
+        res.status(500).send(err);
+    }
+ });
+
+
 
 module.exports = router

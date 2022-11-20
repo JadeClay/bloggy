@@ -2,7 +2,6 @@ import { Typography } from '@mui/material';
 import { Stack } from '@mui/system'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import image from "../../static/images/background.jpg";
 
 export default class HeroImage extends Component {
   static propTypes = {
@@ -16,7 +15,7 @@ export default class HeroImage extends Component {
 
   render() {
     return (
-      <Stack sx={{backgroundImage: `url(${image})`, backgroundSize: "cover", height: "30vh"}}>
+      <Stack sx={{backgroundImage: `url(http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/images/background.jpg)`, backgroundSize: "cover", height: "30vh"}}>
         
         <Typography variant="h3" component="h2" color={'white'} align="center"
             sx={{

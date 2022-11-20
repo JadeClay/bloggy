@@ -1,9 +1,11 @@
 /* 3rd party libraries */
 const dotenv = require('dotenv').config({ path: '../../.env' });
 const mongoose = require('mongoose');
+const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const express = require('express');
 const passport = require('./auth/auth');
+const morgan = require('morgan');
 const session = require('express-session')({
   secret: process.env.secret,
   resave: false,
@@ -44,6 +46,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use(fileUpload({
+  createParentPath: true
+}))
+app.use(morgan('dev'));
+app.use(express.static('public')); 
+app.use('/images', express.static('images'));
 
 /* Using method to serialize and deserialize sessions */
 passport.serializeUser(User.serializeUser());
