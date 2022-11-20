@@ -103,10 +103,10 @@ function LoginModal({setUser}) {
             <Container>
                 <form method='POST' onSubmit={handleSubmit}>
                     <Stack sx={{mt: 2}} spacing={2}>
-                        {error && <TextField error id="filled-basic" label="Username" variant="filled" name='username' onChange={handleUsername} helperText={errorMessage} /> }
-                        {error && <TextField error id="filled-basic" label="Password" variant="filled" name='password' type='password' onChange={handlePassword}/>}
-                        {!error && <TextField id="filled-basic" label="Username" variant="filled" name='username' onChange={handleUsername}/>}
-                        {!error && <TextField id="filled-basic" label="Password" variant="filled" name='password' type='password' onChange={handlePassword}/>}
+                        {error && <TextField error id="filled-basic1" label="Username" variant="filled" name='username' onChange={handleUsername} helperText={errorMessage} /> }
+                        {error && <TextField error id="filled-basic2" label="Password" variant="filled" name='password' type='password' onChange={handlePassword}/>}
+                        {!error && <TextField id="filled-basic1" label="Username" variant="filled" name='username' onChange={handleUsername}/>}
+                        {!error && <TextField id="filled-basic2" label="Password" variant="filled" name='password' type='password' onChange={handlePassword}/>}
                         <Button type='submit'>Submit</Button>
                     </Stack>
                 </form>

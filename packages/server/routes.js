@@ -9,6 +9,7 @@ const InfoMessages = require('./Utils/Error');
 /*Importing all mongodb models */
 const Post = require('./Models/Post');
 const User = require('./Models/User');
+const Author = require('./Models/Author');
 
 /* Authentification routes */
 
@@ -69,6 +70,33 @@ router.get("/me", (req, res, next) => {
     else res.status(404).send({ success: false, message: "Username not found"});
 })
 
+router.get("/accounts/all", async (req, res) => {
+    
+    try {
+        const Accounts = await User.find({}, {salt:0, hash:0}).lean().exec();
+
+        res.json({Accounts});
+    } catch (error) {
+        console.error(error);
+        res.status(404);
+    }
+
+})
+
+router.delete("/accounts/delete", async (req, res) => {
+    const AccountId = req.body.id;
+
+    try{
+        const AccountDeleted = await User.findByIdAndDelete(AccountId).exec();
+
+        res.status(200).send({success: true, message: AccountDeleted});
+    } catch (error) {
+        console.error(error);
+        res.status(404).send({message: error})
+    }
+
+})
+
 /* Posts routes */
 
 router.get("/posts/all", async (req, res) => {
@@ -116,7 +144,7 @@ router.get("/posts/find/:id", async (req, res) => {
         res.status(404);
     }
 
-})
+});
 
 router.delete("/posts/delete", async function (req, res){
     

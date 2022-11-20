@@ -16,7 +16,7 @@ export default function DashboardPosts() {
         </Grid>
 
         <Grid item xs={11} sx={{marginLeft: {xs: '15vw', md: 0}}}>
-          <Grid container spacing={0}>
+          <Grid container spacing={1}>
             <Grid item xs={12}>
               <Typography variant="h3" textAlign={"left"} sx={{paddingTop: 3}}><EmojiPeopleIcon sx={{fontSize: 'inherit'}}/> Hello, {user.user}!</Typography>
             </Grid>

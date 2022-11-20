@@ -2,6 +2,7 @@ import React from "react";
 import MDEditor from '@uiw/react-md-editor';
 import { Stack } from "@mui/system";
 import { Alert, Box, Button, Snackbar, TextField } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 
 // TO DO: Create all bussiness logic to create the post. Add a CREATE button and a Title field.
 
@@ -93,8 +94,8 @@ export default function Editor(author) {
                 />
             </div>
 
-            <Box sx={{width: {xs: 'auto', md: "19%"}, ml: {xs: 0, md: "auto"}, mt: "2vh"}}>
-              <Button variant="contained" type="submit">Create post</Button>
+            <Box sx={{width: {xs: 'auto', md: "19%"}, mt: "2vh"}}>
+              <Button variant="contained" type="submit" startIcon={<AddIcon/>}>Create post</Button>
             </Box>
         </Stack>
       </form>

@@ -4,6 +4,8 @@ import React from 'react'
 import { Navigate } from 'react-router-dom';
 import AdminSidebar from '../../Components/AdminSidebar';
 import { useSelector } from 'react-redux';
+import DashboardPostList from '../../Components/Posts/DashboardPostList';
+import DashboardAccountList from '../../Components/Accounts/DashboardAccountList';
 
 export default function DashboardAccounts() {
   const user = useSelector((state) => state.user.value);
@@ -16,12 +18,12 @@ export default function DashboardAccounts() {
         
 
         <Grid item xs={11} sx={{marginLeft: {xs: '15vw', md: 0}}}>
-          <Grid container spacing={0}>
+          <Grid container spacing={1}>
             <Grid item xs={12}>
               <Typography variant="h3" textAlign={"left"} sx={{paddingTop: 3}}><EmojiPeopleIcon sx={{fontSize: 'inherit'}}/> Hello, {user.user}!</Typography>
             </Grid>
             <Grid item xs={12}>
-                <p>Testing</p>
+              <DashboardAccountList />
             </Grid>
           </Grid>
         </Grid>
