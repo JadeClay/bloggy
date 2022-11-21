@@ -200,38 +200,6 @@ router.get('/posts/last', async (req, res) => {
     res.status(200).send(all);
 })
 
-/* Background Upload Route */
-
-router.post('/upload/background', async function (req, res) {
-    try {
-        if(!req.files) {
-            res.send({
-                status: false,
-                message: 'No file uploaded'
-            });
-        } else {
-            //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-            let background = req.files.background;
-            
-            //Use the mv() method to place the file in the upload directory (i.e. "uploads")
-            background.mv('./public/images/' + "background.jpg");
-
-            //send response
-            res.send({
-                status: true,
-                message: 'File is uploaded',
-                data: {
-                    name: background.name,
-                    mimetype: background.mimetype,
-                    size: background.size
-                }
-            });
-        }
-    } catch (err) {
-        res.status(500).send(err);
-    }
-});
-
 /* Author Routes */
 
 router.post("/author/edit", async (req, res) => {
@@ -250,5 +218,68 @@ router.post("/author/edit", async (req, res) => {
    res.status(200).send({success: true, author: author});
 
 });
+
+
+/* Upload Images Routes */
+
+router.post('/upload/profile', async function (req, res) {
+    try {
+        if(!req.files) {
+            res.send({
+                status: false,
+                message: 'No file uploaded'
+            });
+        } else {
+            //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
+            let profile = req.files.profile;
+            
+            //Use the mv() method to place the file in the upload directory (i.e. "uploads")
+            profile.mv('./public/images/' + "profile.jpg");
+
+            //send response
+            res.send({
+                status: true,
+                message: 'File is uploaded',
+                data: {
+                    name: profile.name,
+                    mimetype: profile.mimetype,
+                    size: profile.size
+                }
+            });
+        }
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+router.post("/upload/author", async (req, res) =>{
+    try {
+        if(!req.files) {
+            res.send({
+                status: false,
+                message: 'No file uploaded'
+            });
+        } else {
+            //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
+            let profile = req.files.profile;
+            
+            //Use the mv() method to place the file in the upload directory (i.e. "uploads")
+            profile.mv('./public/images/' + "profile.jpg");
+
+            //send response
+            res.send({
+                status: true,
+                message: 'File is uploaded',
+                data: {
+                    name: profile.name,
+                    mimetype: profile.mimetype,
+                    size: profile.size
+                }
+            });
+        }
+    } catch (err) {
+        res.status(500).send(err);
+    }
+})
 
 module.exports = router

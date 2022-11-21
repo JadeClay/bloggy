@@ -5,6 +5,7 @@ import ContactPageIcon from '@mui/icons-material/ContactPage';
 import DescriptionIcon from '@mui/icons-material/Description';
 import EditIcon from '@mui/icons-material/Edit';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
+import { useEffect } from 'react';
 
 export default function EditAutor() {
     const [author, setAuthor] = React.useState("");
@@ -33,9 +34,9 @@ export default function EditAutor() {
     const handleFileChange = async (e) => {
 
         let formData = new FormData()
-        formData.append('background', e.target.files[0])
+        formData.append('profile', e.target.files[0])
         
-        const response = await fetch(`http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/upload/background`, {
+        const response = await fetch(`http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/upload/author`, {
           method: 'POST',
           body: formData,
         })
@@ -57,7 +58,7 @@ export default function EditAutor() {
                         <TextField 
                             id="author-name" 
                             label="Author Name" 
-                            variant="outlined" 
+                            variant="outlined"
                             sx={{width: '80%'}}
                             onChange={handleAuthor}
                             InputProps={{
@@ -79,7 +80,7 @@ export default function EditAutor() {
                     >
                         <TextField 
                             id="author-description" 
-                            label="Author Description" 
+                            label="Author Description (Use markdown for style)" 
                             variant="outlined" 
                             sx={{width: '80%'}}
                             multiline
