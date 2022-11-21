@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("./auth/auth");
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+var fs = require('fs');
 
 /* Bloggy Libraries */
 const InfoMessages = require('./Utils/Error');
@@ -9,6 +10,7 @@ const InfoMessages = require('./Utils/Error');
 /*Importing all mongodb models */
 const Post = require('./Models/Post');
 const User = require('./Models/User');
+const Author = require('./Models/Author');
 
 /* Authentification routes */
 
@@ -228,8 +230,25 @@ router.post('/upload/background', async function (req, res) {
     } catch (err) {
         res.status(500).send(err);
     }
- });
+});
 
+/* Author Routes */
 
+router.post("/author/edit", async (req, res) => {
+    const name = req.body.author;
+    const description = req.body.description;
+
+    var author = {
+        author: name,
+        description: description
+    }
+
+   fs.writeFile('./public/author.json', JSON.stringify(author), (err) =>{
+    InfoMessages.Warning(err);
+   });
+
+   res.status(200).send({success: true, author: author});
+
+});
 
 module.exports = router

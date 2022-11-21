@@ -9,7 +9,7 @@ export default function LatestPost() {
     const [Link, setLink] = useState("/");
 
     useEffect(() => {
-        fetch(`http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/posts/last`, {method: 'GET'})
+        fetch(`http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/posts/last`, {method: 'GET', headers: { 'Content-Type': 'application/json' },})
             .then(response => { 
                 if(!response.ok){ 
                     throw new Error(`HTTP ${response.status}`)
