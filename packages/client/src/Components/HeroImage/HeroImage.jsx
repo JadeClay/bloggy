@@ -1,38 +1,34 @@
 import { Typography } from '@mui/material';
-import { Stack } from '@mui/system'
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import { Stack } from '@mui/system';
+import React from 'react';
+import { useEffect } from 'react';
 
-export default class HeroImage extends Component {
-  static propTypes = {
+export default function HeroImage() {
+  const [info, setInfo] = React.useState({ name: "Bloggy", description: ""});
 
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string,
+  useEffect(() => {
+    fetch(`http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/blog.json`, 
+    {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+    }).then((res) => res.json()).then(res =>  setInfo(res));
+  }, []);
 
-    /* This is the Image Background of the HeroImage */
-    image: PropTypes.string.isRequired
-}
-
-  render() {
-    return (
-      <Stack sx={{backgroundImage: `url(http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/images/background.jpg)`, backgroundSize: "cover", height: "30vh"}}>
+  return (
+    <Stack sx={{backgroundImage: `linear-gradient(to bottom, rgba(42, 44, 46, 0.7), rgba(42, 44, 46, 0.7)), url(http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/images/background.jpg)`, backgroundSize: "cover", height: "30vh",  justifyContent: "center"}}>
         
-        <Typography variant="h3" component="h2" color={'white'} align="center"
-            sx={{
-                paddingTop: {xs: 8, md: 6 },
-        }}>
-            {this.props.title}
+      <Typography variant="h3" component="h2" color={'white'} align="center">
+          {info.name}
         </Typography>
-
-        <Typography variant="h5" component="h2" color={'gray'} align="center"
+        { info.description !== "" && // If there isn't any info.description, this child won't be rendered.
+          <Typography variant="h5" component="h2" color={'white'} align="center"
             sx={{
-                paddingTop: 1,
-                mb: {xs:5, md: 0},
-        }}>
-            {this.props.subtitle}
-        </Typography>
-
+              paddingTop: 1,
+              mb: {xs:5, md: 0},
+          }}>
+            {info.description}
+          </Typography>
+        }
       </Stack>
     )
-  }
 }

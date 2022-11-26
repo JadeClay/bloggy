@@ -200,7 +200,7 @@ router.get('/posts/last', async (req, res) => {
     res.status(200).send(all);
 })
 
-/* Author Routes */
+/* Blog & Author Routes */
 
 router.post("/author/edit", async (req, res) => {
     const name = req.body.author;
@@ -219,10 +219,31 @@ router.post("/author/edit", async (req, res) => {
 
 });
 
+router.post("/info/edit", async (req, res) => {
+    const name = req.body.name;
+    const description = req.body.description;
+    const instagram = req.body.instagram;
+    const twitter = req.body.twitter;
+
+    var blog = {
+        name: name,
+        description: description,
+        instagram: instagram,
+        twitter: twitter
+    }
+
+   fs.writeFile('./public/blog.json', JSON.stringify(blog), (err) =>{
+    InfoMessages.Warning(err);
+   });
+
+   res.status(200).send({success: true});
+    
+})
+
 
 /* Upload Images Routes */
 
-router.post('/upload/profile', async function (req, res) {
+router.post('/upload/background', async function (req, res) {
     try {
         if(!req.files) {
             res.send({
@@ -231,24 +252,25 @@ router.post('/upload/profile', async function (req, res) {
             });
         } else {
             //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-            let profile = req.files.profile;
+            let background = req.files.background;
             
             //Use the mv() method to place the file in the upload directory (i.e. "uploads")
-            profile.mv('./public/images/' + "profile.jpg");
+            background.mv('./public/images/' + "background.jpg");
 
             //send response
             res.send({
                 status: true,
                 message: 'File is uploaded',
                 data: {
-                    name: profile.name,
-                    mimetype: profile.mimetype,
-                    size: profile.size
+                    name: background.name,
+                    mimetype: background.mimetype,
+                    size: background.size
                 }
             });
         }
     } catch (err) {
         res.status(500).send(err);
+        console.log(err);
     }
 });
 
@@ -261,19 +283,19 @@ router.post("/upload/author", async (req, res) =>{
             });
         } else {
             //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-            let profile = req.files.profile;
+            let background = req.files.background;
             
             //Use the mv() method to place the file in the upload directory (i.e. "uploads")
-            profile.mv('./public/images/' + "profile.jpg");
+            background.mv('./public/images/' + "background.jpg");
 
             //send response
             res.send({
                 status: true,
                 message: 'File is uploaded',
                 data: {
-                    name: profile.name,
-                    mimetype: profile.mimetype,
-                    size: profile.size
+                    name: background.name,
+                    mimetype: background.mimetype,
+                    size: background.size
                 }
             });
         }

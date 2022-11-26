@@ -22,7 +22,7 @@ export default function UploadCover() {
     return (
     <Grid container sx={{height: {xs: 'auto', md:'40vh'}, mt: 0.5}} spacing={1}>
         <Grid item xs={12}>
-            <Box sx={{ width: {xs: '90%', md: '100%'}, height: '100%', p: {xs: 16.8, md: 5.7}, backgroundImage: `url(http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/images/background.jpg)`, backgroundSize: 'contain'}}></Box>
+            <Box sx={{ width: {xs: '90%', md: '100%'}, height: '100%', p: {xs: 16.8, md: 5.7}, backgroundImage: `url(http://${process.env.REACT_APP_API_HOSTNAME}:${process.env.REACT_APP_API_PORT}/images/background.jpg)`, backgroundSize: 'cover'}}></Box>
         </Grid>
         <Grid item xs={12}>
             <Stack direction={'row'}>
