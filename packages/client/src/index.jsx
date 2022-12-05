@@ -20,6 +20,7 @@ import DashboardPosts from './routes/Dashboard/DashboardPosts';
 import DashboardSettings from './routes/Dashboard/DashboardSettings';
 import DashboardAccounts from './routes/Dashboard/DashboardAccounts';
 import DashboardPostsEdit from './routes/Dashboard/DashboardPostsEdit';
+import Posts from './routes/Posts/Posts';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/posts",
+        element: <Posts />,
       }
     ]
   },
